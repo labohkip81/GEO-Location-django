@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     #Local apps.
     'measurements.apps.MeasurementsConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -73,6 +74,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'distance_proj.wsgi.application'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 # Database
