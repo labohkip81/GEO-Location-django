@@ -16,8 +16,8 @@ def calculate_distance_view(request):
         destination_ = form.cleaned_data.get('destination')
         destination = geolocator.geocode(destination_)
         print(destination)
-        print(destination.longitude)
-        print(destination.latitude)
+        d_lat = destination.latitude
+        d_long = destination.longitude
         instance.location = 'San Francisco'
         instance.distance = 5000.00
 
