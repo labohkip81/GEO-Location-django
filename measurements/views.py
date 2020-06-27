@@ -21,7 +21,7 @@ def calculate_distance_view(request):
 
     location = geolocator.geocode(city)
 
-    print(f'######, {location}')
+    
 
     location_lat = lat
     location_lon = lon
@@ -53,6 +53,17 @@ def calculate_distance_view(request):
         instance.distance = distance
 
         # folium map modification
+        m = folium.Map(width=800, height=500, location= pointA)
+
+        #Location marker on the map.
+        folium.Marker([location_lat, location_lon], tooltip='Click here for more', popup=city['city'], icon=folium.Icon(color='purple')).add_to(m)
+
+        #Destination marker on the map.
+        folium.Marker([d_lat, d_long], tooltip='Click here for more', popup=destination, icon=folium.Icon(color='red', icon='cloud')).add_to(m)
+
+        
+
+
 
         #Save to the database.
         instance.save()

@@ -7,3 +7,6 @@ def get_geo(ip):
     city = g.city(ip)
     lat, lon = g.lat_lon(ip)
     return country, city, lat, lon
+
+def get_center_coordinates(latA, longA, latB=None, longB=None):
+    coord = 
