@@ -6,7 +6,7 @@ import folium
 
 from .models import Measurement
 from .forms import MeasurementModelForm
-from .utils import get_geo, get_center_coordinates
+from .utils import get_geo, get_center_coordinates, get_zoom
 
 # Create your views here.
 
@@ -31,7 +31,7 @@ def calculate_distance_view(request):
    
 
    #initial folium map modification.    
-    m = folium.Map(width=800, height=500, location=get_center_coordinates(location_lat, location_lon), zoom_start=1)
+    m = folium.Map(width=800, height=500, location=get_center_coordinates(location_lat, location_lon), zoom_start=8)
 
     #Location marker on the map.
     folium.Marker([location_lat, location_lon], tooltip='Click here for more', popup=city['city'], icon=folium.Icon(color='purple')).add_to(m)
@@ -53,7 +53,7 @@ def calculate_distance_view(request):
         instance.distance = distance
 
         # folium map modification
-        m = folium.Map(width=800, height=500, location= get_center_coordinates(d_lat, d_long))
+        m = folium.Map(width=800, height=500, location= get_center_coordinates(d_lat, d_long), zoom_start=get_zoom(distance))
 
         #Location marker on the map.
         folium.Marker([location_lat, location_lon], tooltip='Click here for more', popup=city['city'], icon=folium.Icon(color='purple')).add_to(m)
