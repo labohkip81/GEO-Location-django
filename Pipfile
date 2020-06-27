@@ -8,6 +8,7 @@ django = "*"
 django-crispy-forms = "*"
 geopy = "*"
 geoip2 = "*"
+folium = "*"
 
 [dev-packages]
 
