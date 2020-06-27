@@ -6,4 +6,4 @@ def get_geo(ip):
     country = g.country(ip)
     city = g.city(ip)
     lat, lon = g.lat_lon(ip)
-    return country, city, lat, long
+    return country, city, lat, lon
