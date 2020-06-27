@@ -6,6 +6,8 @@ name = "pypi"
 [packages]
 django = "*"
 django-crispy-forms = "*"
+geopy = "*"
+geoip2 = "*"
 
 [dev-packages]
 

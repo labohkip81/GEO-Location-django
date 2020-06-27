@@ -77,6 +77,8 @@ WSGI_APPLICATION = 'distance_proj.wsgi.application'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
