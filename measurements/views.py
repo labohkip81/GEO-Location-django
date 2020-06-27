@@ -30,8 +30,11 @@ def calculate_distance_view(request):
     pointA = (location_lat, location_lon)
    
 
-   #initial folium map modification.
+   #initial folium map modification.    
     m = folium.Map(width=800, height=500, location= pointA)
+
+    #Location marker on the map.
+    folium.Marker([location_lat, location_lon], tooltip='Click here for more', popup=city['city'], icon=folium.Icon(color='purple')).add_to(m)
 
 
     if form.is_valid():
@@ -53,7 +56,7 @@ def calculate_distance_view(request):
 
         #Save to the database.
         instance.save()
-        
+
     #do an html representation of m
     m = m._repr_html_()
 
