@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Measurement
 from .forms import MeasurementModelForm
 from geopy.geocoders import Nominatim
+from geopy.distance import geodesic
 
 from .utils import get_geo
 
@@ -17,13 +18,19 @@ def calculate_distance_view(request):
     country, city, lat, lon = get_geo(ip)
 
 
-    print('location country =', country)
-    print('location city =', city)
-    print('location latitude longitude =', lat, lon)
+    #print('location country =', country)
+    #print('location city =', city)
+    #print('location latitude longitude =', lat, lon)
 
     location = geolocator.geocode(city)
 
     print(f'######, {location}')
+
+    location_lat = lat
+    location_lon = lon
+    
+    #Coordinates of the fist location
+    pointA = (location_lat, location_lon)
    
 
 
@@ -31,13 +38,17 @@ def calculate_distance_view(request):
         instance = form.save(commit=False)
         destination_ = form.cleaned_data.get('destination')
         destination = geolocator.geocode(destination_)
-        print(destination)
+       # print(destination)
         d_lat = destination.latitude
         d_long = destination.longitude
-        instance.location = 'San Francisco'
-        instance.distance = 5000.00
+        instance.location = location
+        #location of the second location.
+        pointB = (d_lat, d_long)
 
-        #instance.save()
+        distance = round(geodesic(pointA, pointB).km, 2)
+        instance.distance = distance
+
+        instance.save()
 
 
     context = {
