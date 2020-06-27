@@ -6,7 +6,7 @@ import folium
 
 from .models import Measurement
 from .forms import MeasurementModelForm
-from .utils import get_geo, get_center_coordinates, get_zoom
+from .utils import get_geo, get_center_coordinates, get_zoom, get_client_ip
 
 # Create your views here.
 
@@ -25,6 +25,8 @@ def calculate_distance_view(request):
 
     location_lat = lat
     location_lon = lon
+    distance = None
+    destination = None
     
     #Coordinates of the fist location
     pointA = (location_lat, location_lon)
@@ -62,7 +64,9 @@ def calculate_distance_view(request):
         folium.Marker([d_lat, d_long], tooltip='Click here for more', popup=destination, icon=folium.Icon(color='red', icon='cloud')).add_to(m)
 
         
-
+        #Draw a line to show location and destination.
+        line = folium.PolyLine(locations=[pointA, pointB], weight=2, color='blue')
+        m.add_child(line)
 
 
         #Save to the database.
@@ -73,7 +77,8 @@ def calculate_distance_view(request):
 
 
     context = {
-        'distance': obj,
+        'distance': distance,
+        'destination': destination,
         'form': form,
         'map':m,
     }
