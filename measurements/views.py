@@ -31,6 +31,7 @@ def calculate_distance_view(request):
    
 
    #initial folium map modification.
+    m = folium.Map(width=800, height=500, location= pointA)
 
 
     if form.is_valid():
@@ -52,11 +53,15 @@ def calculate_distance_view(request):
 
         #Save to the database.
         instance.save()
+        
+    #do an html representation of m
+    m = m._repr_html_()
 
 
     context = {
         'distance': obj,
         'form': form,
+        'map':m,
     }
 
     return render(request, 'measurements/main.html', context)
